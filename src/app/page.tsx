@@ -16,16 +16,18 @@ export default function Home() {
   return (
     <>
       <BackgroundWrapper />
-      <Navbar />
-      <main>
-        <Hero />
-        <About />
-        <Education />
-        <Projects />
-        <Certificates />
-        <Contact />
-      </main>
-      <Footer />
+      <div className="relative z-10">
+        <Navbar />
+        <main>
+          <Hero />
+          <About />
+          <Education />
+          <Projects />
+          <Certificates />
+          <Contact />
+        </main>
+        <Footer />
+      </div>
     </>
   );
 }

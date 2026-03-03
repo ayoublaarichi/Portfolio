@@ -34,23 +34,51 @@ export const aboutSection = {
   paragraphs: [
     "Je suis Ayoub Laarichi, étudiant en première année d'ingénierie en logiciel et informatique à l'ESISA (École Supérieure d'Ingénierie en Sciences Appliquées).",
     "Passionné par le développement web full-stack, je maîtrise des technologies modernes comme Next.js, React, TypeScript, Tailwind CSS, PostgreSQL et les déploiements cloud sur Vercel.",
-    "Je suis constamment à la recherche de nouveaux défis techniques et d'opportunités pour développer mes compétences en génie logiciel.",
+    "En parallèle, je développe activement mes compétences en cybersécurité, avec un focus sur les rôles de Security Analyst et Penetration Tester. J'explore les méthodologies d'offensive et defensive security à travers des plateformes comme TryHackMe et des outils professionnels.",
+    "Je suis constamment à la recherche de nouveaux défis techniques et d'opportunités pour développer mes compétences en génie logiciel et en sécurité informatique.",
   ],
 
   // --- Compétences techniques ---
   skills: [
+    // --- Développement Web ---
     "Next.js",
     "React",
     "TypeScript",
     "JavaScript",
+    "C++",
     "Tailwind CSS",
+    "HTML / CSS",
     "PostgreSQL",
     "Node.js",
     "Git & GitHub",
     "Vercel",
     "REST APIs",
     "NextAuth",
-    "HTML / CSS",
+    // --- Cybersécurité & Offensive/Defensive ---
+    "Offensive Security",
+    "Defensive Security",
+    "Metasploit",
+    "Nmap",
+    "John the Ripper",
+    "Wireshark",
+    "Active Directory Basics",
+    "Cryptography",
+    "Hashing",
+    // --- Réseaux & Infrastructure ---
+    "Linux",
+    "Networking Concepts",
+    "DNS",
+    "HTTP",
+    "OSI Model",
+    "Packets & Frames",
+    "LAN",
+    "Networking Core Protocols",
+    "Networking Secure Protocols",
+    "Client-Server Basics",
+    // --- Cloud & Autres ---
+    "Cloud Computing Fundamentals",
+    "Data Representation",
+    "Search Skills",
   ],
 };
 

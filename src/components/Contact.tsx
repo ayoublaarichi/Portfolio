@@ -1,6 +1,8 @@
 /**
  * Composant Contact — Section formulaire de contact et liens.
  */
+"use client";
+
 import { personalInfo, contactSection } from "@/data/portfolio";
 import { FaLinkedin, FaGithub, FaEnvelope } from "react-icons/fa";
 
@@ -22,7 +24,7 @@ export default function Contact() {
         {/* --- Bouton Email principal --- */}
         <a
           href={`mailto:${personalInfo.email}`}
-          className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-blue-600 text-white text-lg font-semibold hover:bg-blue-500 transition-colors shadow-lg shadow-blue-600/25 mb-12"
+          className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-blue-600 text-white text-lg font-semibold hover:bg-blue-500 transition-colors shadow-lg shadow-blue-600/25 mb-12 cursor-pointer relative z-20"
         >
           <FaEnvelope />
           {personalInfo.email}
