@@ -50,28 +50,28 @@ export default function AnimatedBackground() {
   const animRef = useRef<number>(0);
 
   const initSymbols = useCallback((w: number, h: number): FloatingSymbol[] => {
-    return Array.from({ length: 50 }, () => ({
+    return Array.from({ length: 80 }, () => ({
       text: SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)],
       x: Math.random() * w,
       y: Math.random() * h,
-      z: Math.random() * 3 + 1,
-      speed: 0.2 + Math.random() * 0.6,
-      rotSpeed: (Math.random() - 0.5) * 0.02,
+      z: Math.random() * 2 + 1,
+      speed: 0.3 + Math.random() * 0.8,
+      rotSpeed: (Math.random() - 0.5) * 0.03,
       angle: Math.random() * Math.PI * 2,
-      fontSize: 12 + Math.random() * 16,
+      fontSize: 14 + Math.random() * 20,
       color: COLORS[Math.floor(Math.random() * COLORS.length)],
-      opacity: 0.08 + Math.random() * 0.18,
+      opacity: 0.2 + Math.random() * 0.35,
     }));
   }, []);
 
   const initParticles = useCallback((w: number, h: number): Particle[] => {
-    return Array.from({ length: 120 }, () => ({
+    return Array.from({ length: 180 }, () => ({
       x: Math.random() * w,
       y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.3,
-      vy: (Math.random() - 0.5) * 0.3,
-      size: Math.random() * 2.5 + 0.5,
-      opacity: Math.random() * 0.5 + 0.1,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5,
+      size: Math.random() * 3.5 + 1,
+      opacity: Math.random() * 0.7 + 0.2,
       color: COLORS[Math.floor(Math.random() * COLORS.length)],
     }));
   }, []);
@@ -114,8 +114,8 @@ export default function AnimatedBackground() {
       const gridSpacing = 60;
       const offset = (t * 15) % gridSpacing;
 
-      ctx.strokeStyle = "rgba(30, 58, 95, 0.15)";
-      ctx.lineWidth = 0.5;
+      ctx.strokeStyle = "rgba(30, 58, 95, 0.3)";
+      ctx.lineWidth = 0.8;
 
       // Lignes horizontales
       for (let y = offset; y < h; y += gridSpacing) {
@@ -136,8 +136,8 @@ export default function AnimatedBackground() {
       // Lignes de perspective convergentes (effet Tron)
       const centerX = w / 2 + mouseRef.current.x * 50;
       const centerY = h * 0.4 + mouseRef.current.y * 30;
-      ctx.strokeStyle = "rgba(59, 130, 246, 0.06)";
-      ctx.lineWidth = 0.8;
+      ctx.strokeStyle = "rgba(59, 130, 246, 0.15)";
+      ctx.lineWidth = 1.2;
       for (let i = 0; i < 12; i++) {
         const angle = (i / 12) * Math.PI * 2 + t * 0.1;
         const endX = centerX + Math.cos(angle) * Math.max(w, h);
@@ -170,14 +170,14 @@ export default function AnimatedBackground() {
 
       // Dessiner les connexions entre particules proches
       ctx.strokeStyle = "#3b82f6";
-      ctx.lineWidth = 0.3;
+      ctx.lineWidth = 0.6;
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 100) {
-            ctx.globalAlpha = (1 - dist / 100) * 0.12;
+          if (dist < 130) {
+            ctx.globalAlpha = (1 - dist / 130) * 0.3;
             ctx.beginPath();
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
@@ -217,7 +217,7 @@ export default function AnimatedBackground() {
 
         // Glow effect
         ctx.shadowColor = s.color;
-        ctx.shadowBlur = 8;
+        ctx.shadowBlur = 18;
         ctx.fillText(s.text, 0, 0);
         ctx.shadowBlur = 0;
 
@@ -243,7 +243,7 @@ export default function AnimatedBackground() {
       const gradient = ctx.createRadialGradient(
         w / 2, h / 2, 0, w / 2, h / 2, Math.max(w, h) * 0.7
       );
-      gradient.addColorStop(0, "rgba(15, 23, 42, 0.3)");
+      gradient.addColorStop(0, "rgba(15, 23, 42, 0.5)");
       gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, w, h);

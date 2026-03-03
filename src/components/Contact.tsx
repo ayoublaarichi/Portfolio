@@ -23,7 +23,7 @@ export default function Contact() {
 
         {/* --- Bouton Email principal --- */}
         <a
-          href={`https://mail.google.com/mail/?view=cm&to=${personalInfo.email}`}
+          href={`https://mail.google.com/mail/u/0/#inbox?compose=new&to=${personalInfo.email}`}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-blue-600 text-white text-lg font-semibold hover:bg-blue-500 transition-colors shadow-lg shadow-blue-600/25 mb-12 cursor-pointer relative z-20"
