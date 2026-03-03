@@ -1,14 +1,9 @@
 /**
- * Wrapper client pour charger le fond 3D dynamiquement (pas de SSR).
+ * Wrapper client pour charger le fond animé (client-only).
  */
 "use client";
 
-import dynamic from "next/dynamic";
-
-const AnimatedBackground = dynamic(
-  () => import("@/components/AnimatedBackground"),
-  { ssr: false }
-);
+import AnimatedBackground from "@/components/AnimatedBackground";
 
 export default function BackgroundWrapper() {
   return <AnimatedBackground />;

@@ -1,210 +1,277 @@
 /**
  * Composant AnimatedBackground — Fond 3D interactif avec thème CS/Coding/Gaming/Hacking.
- * Utilise Three.js via @react-three/fiber pour un rendu 3D performant.
- * Affiche des symboles flottants liés au code, terminal, gaming et cybersécurité.
+ * Utilise un Canvas 2D performant pour un rendu fluide sans dépendances externes.
+ * Affiche des symboles flottants, particules et une grille cyberpunk.
  */
 "use client";
 
-import { useRef, useMemo } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Text, Float } from "@react-three/drei";
-import * as THREE from "three";
+import { useEffect, useRef, useCallback } from "react";
 
 // --- Symboles flottants : code, terminal, hacking, gaming ---
 const SYMBOLS = [
-  // Coding
   "</>", "{}", "=>", "//", "&&", "||", "!=", "++", "let", "fn",
   "git", "npm", "tsx", "py", "js", "css", "sql", "api",
-  // Terminal / Hacking / Kali
   "~/", "sudo", "root", "$_", "ssh", "nmap", "0x", "chmod",
   "#!", "ping", "wget", "curl", "hack", "kali", ">>",
-  // Gaming
   "GG", "FPS", "HP", "XP", "LVL", "CTF", "PWN", "0day",
-  // Binary / Matrix vibe
   "01", "10", "11", "00", "0xff", "null", "void", "int",
 ];
 
-/**
- * Un symbole 3D flottant individuel.
- */
-function FloatingSymbol({
-  text,
-  position,
-  speed,
-  rotationSpeed,
-  color,
-}: {
+const COLORS = [
+  "#3b82f6", "#6366f1", "#8b5cf6", "#06b6d4", "#10b981", "#22d3ee",
+];
+
+interface FloatingSymbol {
   text: string;
-  position: [number, number, number];
+  x: number;
+  y: number;
+  z: number;
   speed: number;
-  rotationSpeed: number;
+  rotSpeed: number;
+  angle: number;
+  fontSize: number;
   color: string;
-}) {
-  const meshRef = useRef<THREE.Mesh>(null);
-  const initialY = position[1];
-
-  useFrame((state) => {
-    if (!meshRef.current) return;
-    const t = state.clock.getElapsedTime();
-
-    // Mouvement vertical oscillant
-    meshRef.current.position.y = initialY + Math.sin(t * speed) * 0.8;
-
-    // Rotation lente
-    meshRef.current.rotation.x += rotationSpeed * 0.002;
-    meshRef.current.rotation.y += rotationSpeed * 0.003;
-    meshRef.current.rotation.z += rotationSpeed * 0.001;
-  });
-
-  return (
-    <Float speed={1.5} rotationIntensity={0.3} floatIntensity={0.5}>
-      <mesh ref={meshRef} position={position}>
-        <Text
-          fontSize={0.25 + Math.random() * 0.2}
-          color={color}
-          anchorX="center"
-          anchorY="middle"
-          font="/fonts/GeistMono-Regular.ttf"
-          fillOpacity={0.15 + Math.random() * 0.2}
-        >
-          {text}
-        </Text>
-      </mesh>
-    </Float>
-  );
+  opacity: number;
 }
 
-/**
- * Particules de fond style matrix / digital rain.
- */
-function Particles({ count = 200 }: { count?: number }) {
-  const meshRef = useRef<THREE.Points>(null);
-
-  const [positions, sizes] = useMemo(() => {
-    const pos = new Float32Array(count * 3);
-    const sz = new Float32Array(count);
-    for (let i = 0; i < count; i++) {
-      pos[i * 3] = (Math.random() - 0.5) * 30;
-      pos[i * 3 + 1] = (Math.random() - 0.5) * 20;
-      pos[i * 3 + 2] = (Math.random() - 0.5) * 15;
-      sz[i] = Math.random() * 2 + 0.5;
-    }
-    return [pos, sz];
-  }, [count]);
-
-  useFrame((state) => {
-    if (!meshRef.current) return;
-    const t = state.clock.getElapsedTime();
-    meshRef.current.rotation.y = t * 0.02;
-    meshRef.current.rotation.x = Math.sin(t * 0.01) * 0.1;
-  });
-
-  return (
-    <points ref={meshRef}>
-      <bufferGeometry>
-        <bufferAttribute
-          attach="attributes-position"
-          args={[positions, 3]}
-        />
-        <bufferAttribute
-          attach="attributes-size"
-          args={[sizes, 1]}
-        />
-      </bufferGeometry>
-      <pointsMaterial
-        size={0.03}
-        color="#3b82f6"
-        transparent
-        opacity={0.4}
-        sizeAttenuation
-        blending={THREE.AdditiveBlending}
-      />
-    </points>
-  );
+interface Particle {
+  x: number;
+  y: number;
+  vx: number;
+  vy: number;
+  size: number;
+  opacity: number;
+  color: string;
 }
 
-/**
- * Grille de fond style Tron / cyberpunk.
- */
-function CyberGrid() {
-  const gridRef = useRef<THREE.GridHelper>(null);
+export default function AnimatedBackground() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const mouseRef = useRef({ x: 0, y: 0 });
+  const animRef = useRef<number>(0);
 
-  useFrame((state) => {
-    if (!gridRef.current) return;
-    const t = state.clock.getElapsedTime();
-    gridRef.current.position.z = (t * 0.5) % 2;
-  });
-
-  return (
-    <gridHelper
-      ref={gridRef}
-      args={[40, 40, "#1e3a5f", "#0f1b2d"]}
-      position={[0, -5, 0]}
-      rotation={[0, 0, 0]}
-    />
-  );
-}
-
-/**
- * Scène 3D complète.
- */
-function Scene() {
-  // Générer des symboles avec positions aléatoires
-  const symbols = useMemo(() => {
-    return Array.from({ length: 40 }, (_, i) => ({
-      text: SYMBOLS[i % SYMBOLS.length],
-      position: [
-        (Math.random() - 0.5) * 20,
-        (Math.random() - 0.5) * 12,
-        (Math.random() - 0.5) * 8 - 2,
-      ] as [number, number, number],
-      speed: 0.3 + Math.random() * 0.7,
-      rotationSpeed: 0.5 + Math.random() * 2,
-      color: [
-        "#3b82f6", // blue
-        "#6366f1", // indigo
-        "#8b5cf6", // violet
-        "#06b6d4", // cyan
-        "#10b981", // emerald (terminal green)
-        "#22d3ee", // light cyan
-      ][Math.floor(Math.random() * 6)],
+  const initSymbols = useCallback((w: number, h: number): FloatingSymbol[] => {
+    return Array.from({ length: 50 }, () => ({
+      text: SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)],
+      x: Math.random() * w,
+      y: Math.random() * h,
+      z: Math.random() * 3 + 1,
+      speed: 0.2 + Math.random() * 0.6,
+      rotSpeed: (Math.random() - 0.5) * 0.02,
+      angle: Math.random() * Math.PI * 2,
+      fontSize: 12 + Math.random() * 16,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+      opacity: 0.08 + Math.random() * 0.18,
     }));
   }, []);
 
+  const initParticles = useCallback((w: number, h: number): Particle[] => {
+    return Array.from({ length: 120 }, () => ({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      size: Math.random() * 2.5 + 0.5,
+      opacity: Math.random() * 0.5 + 0.1,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+    }));
+  }, []);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d")!;
+    if (!ctx) return;
+
+    let w = window.innerWidth;
+    let h = window.innerHeight;
+    canvas.width = w;
+    canvas.height = h;
+
+    let symbols = initSymbols(w, h);
+    let particles = initParticles(w, h);
+    let time = 0;
+
+    // --- Gestion du resize ---
+    const handleResize = () => {
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = w;
+      canvas.height = h;
+      symbols = initSymbols(w, h);
+      particles = initParticles(w, h);
+    };
+    window.addEventListener("resize", handleResize);
+
+    // --- Suivi de la souris pour effet parallaxe ---
+    const handleMouse = (e: MouseEvent) => {
+      mouseRef.current.x = (e.clientX / w - 0.5) * 2;
+      mouseRef.current.y = (e.clientY / h - 0.5) * 2;
+    };
+    window.addEventListener("mousemove", handleMouse);
+
+    // --- Dessiner la grille cyberpunk animée ---
+    function drawGrid(ctx: CanvasRenderingContext2D, t: number) {
+      const gridSpacing = 60;
+      const offset = (t * 15) % gridSpacing;
+
+      ctx.strokeStyle = "rgba(30, 58, 95, 0.15)";
+      ctx.lineWidth = 0.5;
+
+      // Lignes horizontales
+      for (let y = offset; y < h; y += gridSpacing) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(w, y);
+        ctx.stroke();
+      }
+
+      // Lignes verticales
+      for (let x = offset; x < w; x += gridSpacing) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, h);
+        ctx.stroke();
+      }
+
+      // Lignes de perspective convergentes (effet Tron)
+      const centerX = w / 2 + mouseRef.current.x * 50;
+      const centerY = h * 0.4 + mouseRef.current.y * 30;
+      ctx.strokeStyle = "rgba(59, 130, 246, 0.06)";
+      ctx.lineWidth = 0.8;
+      for (let i = 0; i < 12; i++) {
+        const angle = (i / 12) * Math.PI * 2 + t * 0.1;
+        const endX = centerX + Math.cos(angle) * Math.max(w, h);
+        const endY = centerY + Math.sin(angle) * Math.max(w, h);
+        ctx.beginPath();
+        ctx.moveTo(centerX, centerY);
+        ctx.lineTo(endX, endY);
+        ctx.stroke();
+      }
+    }
+
+    // --- Dessiner les particules flottantes ---
+    function drawParticles(ctx: CanvasRenderingContext2D) {
+      for (const p of particles) {
+        p.x += p.vx + mouseRef.current.x * 0.1;
+        p.y += p.vy + mouseRef.current.y * 0.1;
+
+        // Wrap-around
+        if (p.x < 0) p.x = w;
+        if (p.x > w) p.x = 0;
+        if (p.y < 0) p.y = h;
+        if (p.y > h) p.y = 0;
+
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = p.opacity;
+        ctx.fill();
+      }
+
+      // Dessiner les connexions entre particules proches
+      ctx.strokeStyle = "#3b82f6";
+      ctx.lineWidth = 0.3;
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist < 100) {
+            ctx.globalAlpha = (1 - dist / 100) * 0.12;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    // --- Dessiner les symboles flottants ---
+    function drawSymbols(ctx: CanvasRenderingContext2D, t: number) {
+      for (const s of symbols) {
+        // Mouvement
+        s.y -= s.speed;
+        s.angle += s.rotSpeed;
+        const parallaxX = mouseRef.current.x * 15 * (1 / s.z);
+        const parallaxY = mouseRef.current.y * 10 * (1 / s.z);
+        const bobY = Math.sin(t * s.speed * 2 + s.x) * 8;
+
+        // Reset si hors écran
+        if (s.y < -50) {
+          s.y = h + 50;
+          s.x = Math.random() * w;
+        }
+
+        const drawX = s.x + parallaxX;
+        const drawY = s.y + parallaxY + bobY;
+
+        ctx.save();
+        ctx.translate(drawX, drawY);
+        ctx.rotate(s.angle);
+        ctx.font = `${s.fontSize / s.z}px 'Courier New', monospace`;
+        ctx.fillStyle = s.color;
+        ctx.globalAlpha = s.opacity / s.z;
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+
+        // Glow effect
+        ctx.shadowColor = s.color;
+        ctx.shadowBlur = 8;
+        ctx.fillText(s.text, 0, 0);
+        ctx.shadowBlur = 0;
+
+        ctx.restore();
+      }
+    }
+
+    // --- Scanlines effect subtil ---
+    function drawScanlines(ctx: CanvasRenderingContext2D) {
+      ctx.fillStyle = "rgba(0, 0, 0, 0.03)";
+      for (let y = 0; y < h; y += 4) {
+        ctx.fillRect(0, y, w, 1);
+      }
+    }
+
+    // --- Boucle d'animation principale ---
+    function animate() {
+      time += 0.016;
+      ctx.clearRect(0, 0, w, h);
+      ctx.globalAlpha = 1;
+
+      // Fond avec léger gradient
+      const gradient = ctx.createRadialGradient(
+        w / 2, h / 2, 0, w / 2, h / 2, Math.max(w, h) * 0.7
+      );
+      gradient.addColorStop(0, "rgba(15, 23, 42, 0.3)");
+      gradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, w, h);
+
+      // Couches de rendu
+      drawGrid(ctx, time);
+      drawParticles(ctx);
+      drawSymbols(ctx, time);
+      drawScanlines(ctx);
+
+      ctx.globalAlpha = 1;
+      animRef.current = requestAnimationFrame(animate);
+    }
+
+    animRef.current = requestAnimationFrame(animate);
+
+    return () => {
+      cancelAnimationFrame(animRef.current);
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousemove", handleMouse);
+    };
+  }, [initSymbols, initParticles]);
+
   return (
-    <>
-      {/* Lumière ambiante douce */}
-      <ambientLight intensity={0.3} />
-      <pointLight position={[10, 10, 10]} intensity={0.5} />
-
-      {/* Grille cyberpunk */}
-      <CyberGrid />
-
-      {/* Particules flottantes */}
-      <Particles count={150} />
-
-      {/* Symboles CS/Coding/Gaming flottants */}
-      {symbols.map((sym, i) => (
-        <FloatingSymbol key={i} {...sym} />
-      ))}
-    </>
-  );
-}
-
-/**
- * Composant principal exporté — Canvas 3D en arrière-plan fixe.
- */
-export default function AnimatedBackground() {
-  return (
-    <div className="fixed inset-0 -z-10">
-      <Canvas
-        camera={{ position: [0, 0, 8], fov: 60 }}
-        dpr={[1, 1.5]}
-        gl={{ antialias: true, alpha: true }}
-        style={{ background: "transparent" }}
-      >
-        <Scene />
-      </Canvas>
-    </div>
+    <canvas
+      ref={canvasRef}
+      className="fixed inset-0 -z-10 pointer-events-none"
+      style={{ background: "transparent" }}
+    />
   );
 }
