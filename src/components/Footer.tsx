@@ -7,7 +7,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="py-8 px-6 border-t border-gray-200 dark:border-gray-800 text-center text-sm text-gray-500 dark:text-gray-500">
+    <footer className="py-8 px-6 border-t border-gray-800/50 text-center text-sm text-gray-500">
       <p>
         &copy; {year} {personalInfo.fullName}. Tous droits réservés.
       </p>
@@ -17,7 +17,7 @@ export default function Footer() {
           href="https://nextjs.org"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-600 dark:text-blue-400 hover:underline"
+          className="text-blue-400 hover:underline"
         >
           Next.js
         </a>{" "}
@@ -26,7 +26,7 @@ export default function Footer() {
           href="https://tailwindcss.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-600 dark:text-blue-400 hover:underline"
+          className="text-blue-400 hover:underline"
         >
           Tailwind CSS
         </a>
@@ -35,7 +35,7 @@ export default function Footer() {
           href="https://vercel.com"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-600 dark:text-blue-400 hover:underline"
+          className="text-blue-400 hover:underline"
         >
           Vercel
         </a>

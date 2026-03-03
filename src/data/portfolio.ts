@@ -11,8 +11,8 @@
 export const personalInfo = {
   // --- Informations personnelles ---
   firstName: "Ayoub",
-  lastName: "Laarich",
-  fullName: "Ayoub Laarich",
+  lastName: "Laarichi",
+  fullName: "Ayoub Laarichi",
 
   // --- Titre affiché sous ton nom ---
   title: "Étudiant Ingénieur en Logiciel & Informatique",
@@ -32,7 +32,7 @@ export const personalInfo = {
 export const aboutSection = {
   // --- Texte de la section "À propos" ---
   paragraphs: [
-    "Je suis Ayoub Laarich, étudiant en première année d'ingénierie en logiciel et informatique à l'ESISA (École Supérieure d'Ingénierie en Sciences Appliquées).",
+    "Je suis Ayoub Laarichi, étudiant en première année d'ingénierie en logiciel et informatique à l'ESISA (École Supérieure d'Ingénierie en Sciences Appliquées).",
     "Passionné par le développement web full-stack, je maîtrise des technologies modernes comme Next.js, React, TypeScript, Tailwind CSS, PostgreSQL et les déploiements cloud sur Vercel.",
     "Je suis constamment à la recherche de nouveaux défis techniques et d'opportunités pour développer mes compétences en génie logiciel.",
   ],
@@ -107,3 +107,32 @@ export const contactSection = {
   description:
     "N'hésitez pas à me contacter pour toute opportunité de collaboration, stage ou projet. Je suis toujours ouvert aux nouvelles idées !",
 };
+
+export const certificatesSection = [
+  // --- Ajoute tes certificats ici ---
+  {
+    title: "C Programming Basics",
+    issuer: "Simplilearn / SkillUp",
+    image: "/certificates/simplilearn-c.png",
+    url: "https://www.simplilearn.com/skillup-certificate-landing?token=eyJjb3Vyc2VfaWQiOiIzMTM3IiwiY2VydGlmaWNhdGVfdXJsIjoiaHR0cHM6XC9cL2NlcnRpZmljYXRlcy5zaW1wbGljZG4ubmV0XC9zaGFyZVwvOTQ1MjgyNV85NjU4MzkyMTc2Mzg0NTk4NjMxMy5wbmciLCJ1c2VybmFtZSI6ImxhYXJpY2hpIEF5b3ViIn0%3D&referrer=https%3A%2F%2Flms.simplilearn.com%2Fcourses%2F5920%2FC-Programming-Basics%2Fcertificate%2Fdownload-skillup&%24web_only=true",
+  },
+  {
+    title: "TryHackMe – Cybersecurity Path",
+    issuer: "TryHackMe",
+    image: "/certificates/thm-cert-1.png",
+    url: "https://tryhackme.com/certificate/THM-9OYK4GVVGP",
+  },
+  {
+    title: "TryHackMe – Security Training",
+    issuer: "TryHackMe",
+    image: "/certificates/thm-cert-2.png",
+    url: "https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-ANO2TTIBEO.pdf",
+  },
+  // Pour ajouter un autre certificat :
+  // {
+  //   title: "Nom du certificat",
+  //   issuer: "Organisme",
+  //   image: "/certificates/nom-image.png",
+  //   url: "https://lien-vers-le-certificat",
+  // },
+];

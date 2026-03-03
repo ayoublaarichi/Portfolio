@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ayoub Laarich | Portfolio",
+  title: "Ayoub Laarichi | Portfolio",
   description:
-    "Portfolio d'Ayoub Laarich — Étudiant ingénieur en logiciel et informatique à l'ESISA. Développeur full-stack Next.js, React, TypeScript.",
+    "Portfolio d'Ayoub Laarichi — Étudiant ingénieur en logiciel et informatique à l'ESISA. Développeur full-stack Next.js, React, TypeScript.",
 };
 
 export default function RootLayout({
