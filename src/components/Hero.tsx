@@ -54,7 +54,9 @@ export default function Hero() {
             GitHub
           </a>
           <a
-            href={`mailto:${personalInfo.email}`}
+            href={`https://mail.google.com/mail/?view=cm&to=${personalInfo.email}`}
+            target="_blank"
+            rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-gray-700 text-gray-300 font-medium hover:bg-white/10 hover:border-gray-500 transition-colors"
           >
             <FaEnvelope className="text-lg" />

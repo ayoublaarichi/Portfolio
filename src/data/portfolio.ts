@@ -61,7 +61,6 @@ export const aboutSection = {
     "Nmap",
     "John the Ripper",
     "Wireshark",
-    "Active Directory Basics",
     "Cryptography",
     "Hashing",
     // --- Réseaux & Infrastructure ---
@@ -74,7 +73,6 @@ export const aboutSection = {
     "LAN",
     "Networking Core Protocols",
     "Networking Secure Protocols",
-    "Client-Server Basics",
     // --- Cloud & Autres ---
     "Cloud Computing Fundamentals",
     "Data Representation",
