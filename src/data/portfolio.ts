@@ -196,18 +196,46 @@ export const certificatesSection = [
   {
     title: "C Programming Basics",
     issuer: "Simplilearn / SkillUp",
+    description:
+      "Foundational certification in C programming covering syntax, control structures, functions, and algorithmic problem-solving.",
+    skills: [
+      "C Programming",
+      "Algorithmic Thinking",
+      "Control Structures",
+      "Fonctions",
+      "Functions",
+      "Problem Solving",
+    ],
     image: "/certificates/simplilearn-c.png",
     url: "https://www.simplilearn.com/skillup-certificate-landing?token=eyJjb3Vyc2VfaWQiOiIzMTM3IiwiY2VydGlmaWNhdGVfdXJsIjoiaHR0cHM6XC9cL2NlcnRpZmljYXRlcy5zaW1wbGljZG4ubmV0XC9zaGFyZVwvOTQ1MjgyNV85NjU4MzkyMTc2Mzg0NTk4NjMxMy5wbmciLCJ1c2VybmFtZSI6ImxhYXJpY2hpIEF5b3ViIn0%3D&referrer=https%3A%2F%2Flms.simplilearn.com%2Fcourses%2F5920%2FC-Programming-Basics%2Fcertificate%2Fdownload-skillup&%24web_only=true",
   },
   {
     title: "TryHackMe – Cybersecurity Path",
     issuer: "TryHackMe",
+    description:
+      "Hands-on cybersecurity pathway focused on blue-team and red-team fundamentals through practical labs and real-world scenarios.",
+    skills: [
+      "Cybersecurity Fundamentals",
+      "Network Security",
+      "Threat Analysis",
+      "Linux Basics",
+      "Offensive Security",
+    ],
     image: "/certificates/thm-cert-1.png",
     url: "https://tryhackme.com/certificate/THM-9OYK4GVVGP",
   },
   {
     title: "TryHackMe – Security Training",
     issuer: "TryHackMe",
+    description:
+      "Applied security training based on realistic scenarios to strengthen investigation, detection, and system hardening practices.",
+    skills: [
+      "Incident Investigation",
+      "Vulnerability Assessment",
+      "Security Hardening",
+      "Tooling (Nmap / Wireshark)",
+      "Hands-on Practice",
+    ],
     image: "/certificates/thm-cert-2.png",
     url: "https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-ANO2TTIBEO.pdf",
   },
@@ -215,6 +243,8 @@ export const certificatesSection = [
   // {
   //   title: "Nom du certificat",
   //   issuer: "Organisme",
+  //   description: "Description courte du certificat.",
+  //   skills: ["Compétence 1", "Compétence 2", "Compétence 3"],
   //   image: "/certificates/nom-image.png",
   //   url: "https://lien-vers-le-certificat",
   // },

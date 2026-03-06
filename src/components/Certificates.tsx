@@ -26,7 +26,7 @@ export default function Certificates() {
               className="group flex flex-col rounded-2xl border border-gray-800/50 bg-gray-900/50 backdrop-blur-sm shadow-sm hover:shadow-xl hover:shadow-blue-900/20 transition-all duration-300 overflow-hidden hover:-translate-y-1"
             >
               {/* Image du certificat */}
-              <div className="relative w-full aspect-[4/3] bg-gray-800 overflow-hidden">
+              <div className="relative w-full aspect-4/3 bg-gray-800 overflow-hidden">
                 <Image
                   src={cert.image}
                   alt={cert.title}
@@ -41,9 +41,9 @@ export default function Certificates() {
               </div>
 
               {/* Infos du certificat */}
-              <div className="p-5">
+              <div className="p-5 flex flex-col gap-4">
                 <div className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-900/30 flex items-center justify-center text-blue-400 mt-0.5">
+                  <div className="shrink-0 w-10 h-10 rounded-full bg-blue-900/30 flex items-center justify-center text-blue-400 mt-0.5">
                     <FaAward />
                   </div>
                   <div>
@@ -54,6 +54,21 @@ export default function Certificates() {
                       {cert.issuer}
                     </p>
                   </div>
+                </div>
+
+                <p className="text-sm text-gray-300 leading-relaxed">
+                  {cert.description}
+                </p>
+
+                <div className="flex flex-wrap gap-2">
+                  {cert.skills.map((skill) => (
+                    <span
+                      key={skill}
+                      className="text-xs px-2.5 py-1 rounded-full bg-blue-900/30 text-blue-300 border border-blue-800/40"
+                    >
+                      {skill}
+                    </span>
+                  ))}
                 </div>
               </div>
             </a>
