@@ -101,6 +101,63 @@ export const educationSection = [
 export const projectsSection = [
   // --- Ajoute tes projets ici ---
   {
+    title: "LogSentinel",
+    description:
+      "Plateforme de surveillance et d'analyse des logs orientée sécurité. Interface web moderne pour visualiser les événements, détecter des comportements suspects et améliorer la visibilité opérationnelle.",
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Security Monitoring",
+      "Log Analysis",
+      "Vercel",
+    ],
+    liveUrl:
+      "https://logsentinel-n4cwjoew1-laarichiayoub-9075s-projects.vercel.app/",
+    githubUrl: "https://github.com/ayoublaarichi/LogSentinel",
+  },
+  {
+    title: "SafeScan",
+    description:
+      "Suite de sécurité composée d'un outil CLI et d'une interface web pour scanner, analyser et faciliter les vérifications de sécurité sur différents environnements.",
+    technologies: [
+      "Security",
+      "CLI",
+      "Web Application",
+      "JavaScript",
+      "TypeScript",
+      "Vercel",
+    ],
+    liveUrl: "https://safescan-web-two.vercel.app/",
+    githubUrl: "https://github.com/ayoublaarichi/SafeScan_WEB",
+    githubUrls: [
+      {
+        label: "SafeScan CLI",
+        url: "https://github.com/ayoublaarichi/SafeScan_CLI",
+      },
+      {
+        label: "SafeScan WEB",
+        url: "https://github.com/ayoublaarichi/SafeScan_WEB",
+      },
+    ],
+  },
+  {
+    title: "ThreatScan",
+    description:
+      "Application web dédiée à l'évaluation de menaces et au scanning de sécurité, avec une interface claire pour centraliser les résultats et accélérer l'analyse.",
+    technologies: [
+      "Cybersecurity",
+      "Threat Analysis",
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Vercel",
+    ],
+    liveUrl: "https://threatscan-nine.vercel.app/",
+    githubUrl: "https://github.com/ayoublaarichi/ThreatScan",
+  },
+  {
     title: "Student Management",
     description:
       "Application web full-stack de gestion des étudiants. Authentification sécurisée, opérations CRUD complètes sur les données étudiantes, interface web propre et backend API RESTful. Déploiement cloud sur Vercel avec base de données PostgreSQL managée (Neon).",

@@ -70,6 +70,18 @@ export default function Projects() {
                     Code source
                   </a>
                 )}
+                {project.githubUrls?.map((repo) => (
+                  <a
+                    key={repo.url}
+                    href={repo.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-gray-400 hover:text-white text-sm font-medium transition-colors"
+                  >
+                    <FaGithub />
+                    {repo.label}
+                  </a>
+                ))}
               </div>
             </div>
           ))}
