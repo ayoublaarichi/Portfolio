@@ -239,6 +239,21 @@ export const certificatesSection = [
     image: "/certificates/thm-cert-2.png",
     url: "https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-ANO2TTIBEO.pdf",
   },
+  {
+    title: "TryHackMe – Cyber Security 101 Learning Path",
+    issuer: "TryHackMe",
+    description:
+      "Completion certificate for the Cyber Security 101 Learning Path, covering practical foundations in cybersecurity through guided hands-on content.",
+    skills: [
+      "Cyber Security Basics",
+      "Hands-on Labs",
+      "Security Fundamentals",
+      "Learning Path Completion",
+      "TryHackMe",
+    ],
+    image: "/certificates/thm-cert-2.png",
+    url: "https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-CUQVDTXABF.pdf",
+  },
   // Pour ajouter un autre certificat :
   // {
   //   title: "Nom du certificat",
