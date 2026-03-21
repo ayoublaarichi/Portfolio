@@ -251,7 +251,7 @@ export const certificatesSection = [
       "Learning Path Completion",
       "TryHackMe",
     ],
-    image: "/certificates/thm-cert-2.png",
+    image: "/certificates/thm-cert-3.svg",
     url: "https://tryhackme-certificates.s3-eu-west-1.amazonaws.com/THM-CUQVDTXABF.pdf",
   },
   // Pour ajouter un autre certificat :
